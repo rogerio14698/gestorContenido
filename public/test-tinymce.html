@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="test-token">
+    <title>Test TinyMCE</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/tinymce/js/tinymce/tinymce.min.js"></script>
+</head>
+<body>
+    <h1>Test TinyMCE</h1>
+    
+    <div style="margin: 20px;">
+        <h3>Editor Completo:</h3>
+        <textarea class="tinymce-editor" rows="10">
+            <p>Este es un contenido de prueba para el <strong>editor completo</strong>.</p>
+            <p>Puede incluir <em>texto en cursiva</em>, <u>subrayado</u> y mucho más.</p>
+        </textarea>
+    </div>
+    
+    <div style="margin: 20px;">
+        <h3>Editor Simple:</h3>
+        <textarea class="tinymce-simple" rows="3">
+            Este es un <strong>resumen simple</strong> con formato básico.
+        </textarea>
+    </div>
+
+    <script src="/js/tinymce-config.js"></script>
+    
+    <script>
+        console.log('TinyMCE version:', tinymce.majorVersion + '.' + tinymce.minorVersion);
+        console.log('Elementos encontrados con clase tinymce-editor:', document.querySelectorAll('.tinymce-editor').length);
+        console.log('Elementos encontrados con clase tinymce-simple:', document.querySelectorAll('.tinymce-simple').length);
+    </script>
+</body>
+</html>

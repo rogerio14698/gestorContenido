@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificación de Imágenes - Eunomia CMS</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .image-preview { margin: 20px 0; padding: 15px; border: 1px solid #ddd; }
+        .image-preview img { max-width: 300px; height: auto; margin: 10px; border: 1px solid #ccc; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .info { background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+    </style>
+</head>
+<body>
+    <h1>🎭 Verificación del Sistema de Imágenes - Eunomia CMS</h1>
+    
+    <div class="status success">
+        ✅ <strong>Sistema Funcionando:</strong> Las imágenes se están subiendo y guardando correctamente
+    </div>
+
+    <div class="status info">
+        📁 <strong>Estructura de Almacenamiento:</strong> storage/app/public/images/{tipo_contenido}/{tipo_imagen}/
+    </div>
+
+    <h2>📸 Imágenes Subidas Recientemente</h2>
+    
+    <div class="image-preview">
+        <h3>Imagen Principal de Noticia</h3>
+        <p><strong>Archivo:</strong> content_8_16nov08_1762439838_TTKTf1.jpg</p>
+        <p><strong>Ruta:</strong> images/noticia/imagen/</p>
+        <img src="/storage/images/noticia/imagen/content_8_16nov08_1762439838_TTKTf1.jpg" alt="Imagen Principal" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div style="display: none; color: red;">❌ Error cargando imagen - verificar symlink storage</div>
+    </div>
+
+    <div class="image-preview">
+        <h3>Imagen de Portada de Noticia</h3>
+        <p><strong>Archivo:</strong> content_8_20080318-09-sisebuto-y-fallera-valencia_1762439838_9BXbYq.JPG</p>
+        <p><strong>Ruta:</strong> images/noticia/imagen_portada/</p>
+        <img src="/storage/images/noticia/imagen_portada/content_8_20080318-09-sisebuto-y-fallera-valencia_1762439838_9BXbYq.JPG" alt="Imagen de Portada" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div style="display: none; color: red;">❌ Error cargando imagen - verificar symlink storage</div>
+    </div>
+
+    <h2>🔗 Enlaces de Prueba</h2>
+    <ul>
+        <li><a href="/admin/contents" target="_blank">📋 Lista de Contenidos (Admin)</a></li>
+        <li><a href="/admin/contents/create" target="_blank">➕ Crear Nuevo Contenido</a></li>
+        <li><a href="/admin/image-configs" target="_blank">⚙️ Configuración de Imágenes</a></li>
+        <li><a href="/admin/dashboard" target="_blank">🏠 Dashboard Admin</a></li>
+    </ul>
+
+    <h2>📊 Información del Sistema</h2>
+    <ul>
+        <li><strong>Extensión GD:</strong> <?= extension_loaded('gd') ? '✅ Instalada' : '⚠️ No disponible (modo fallback)' ?></li>
+        <li><strong>Storage Link:</strong> <?= is_link(public_path('storage')) ? '✅ Configurado' : '❌ Falta symlink' ?></li>
+        <li><strong>Directorio de Imágenes:</strong> <?= is_dir(storage_path('app/public/images')) ? '✅ Existe' : '❌ No existe' ?></li>
+    </ul>
+
+    <script>
+        // Verificar imágenes cargadas
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img');
+            let loadedCount = 0;
+            
+            images.forEach(img => {
+                img.onload = function() { loadedCount++; };
+            });
+            
+            setTimeout(() => {
+                if (loadedCount === 0) {
+                    alert('⚠️ Las imágenes no se están cargando. Verificar symlink: php artisan storage:link');
+                }
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

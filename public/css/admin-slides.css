@@ -1,0 +1,358 @@
+/* ========================================
+   ADMIN SLIDES - ESTILOS PARA GESTIÓN DE SLIDES
+   ======================================== */
+
+/* Estilos básicos para filas de slides */
+.slide-row {
+    background-color: #f8f9fa;
+    font-weight: 500;
+}
+
+/* ========================================
+   HANDLES - ESTILOS PARA DRAG AND DROP
+   ======================================== */
+
+.handle {
+    color: #6c757d !important;
+    cursor: grab !important;
+    padding: 4px 6px;
+    margin-right: 8px;
+    display: inline-block !important;
+    font-size: 14px !important;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.handle:hover {
+    color: #495057 !important;
+    background-color: #f8f9fa !important;
+    transform: scale(1.1);
+}
+
+.handle:active {
+    cursor: grabbing !important;
+    background-color: #e9ecef !important;
+}
+
+/* ========================================
+   DRAG AND DROP - ESTILOS PARA SORTABLE
+   ======================================== */
+
+.sortable-ghost {
+    opacity: 0.3;
+    background-color: #e3f2fd !important;
+    border: 2px dashed #2196F3 !important;
+}
+
+.sortable-chosen {
+    background-color: #e8f5e8 !important;
+    border-left: 4px solid #28a745 !important;
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.sortable-drag {
+    background-color: #d1ecf1 !important;
+    transform: rotate(1deg) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    border: 2px solid #17a2b8;
+    z-index: 1000;
+}
+
+.dragging {
+    background-color: #e8f5e8 !important;
+    opacity: 0.7;
+}
+
+/* Efectos durante el arrastre */
+.sortable-ghost::after {
+    content: "Suelta aquí";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(33, 150, 243, 0.9);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 1001;
+}
+
+/* Estados de drag and drop */
+.ghost-placeholder {
+    background-color: #e3f2fd;
+    border: 2px dashed #2196F3;
+    height: 60px;
+    opacity: 0.5;
+}
+
+.drag-active {
+    border: 2px solid #28a745;
+    background-color: #d4edda;
+}
+
+/* ========================================
+   SLIDES ESPECÍFICOS
+   ======================================== */
+
+.slide-thumbnail {
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.slide-thumbnail:hover {
+    border-color: #007bff;
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0,123,255,0.3);
+}
+
+.no-image-placeholder {
+    width: 80px;
+    height: 60px;
+    border: 2px dashed #dee2e6;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    margin: 0 auto;
+}
+
+.no-image-placeholder i {
+    font-size: 24px;
+    color: #6c757d;
+}
+
+/* ========================================
+   FORMULARIOS
+   ======================================== */
+
+/* Preview de imagen en formularios */
+#imagePreview img {
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+#imagePreview img:hover {
+    border-color: #007bff;
+    transform: scale(1.02);
+}
+
+/* Inputs de archivo mejorados */
+.form-control[type="file"] {
+    border: 2px dashed #dee2e6;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.form-control[type="file"]:hover {
+    border-color: #007bff;
+    background-color: #e3f2fd;
+}
+
+.form-control[type="file"]:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}
+
+/* ========================================
+   TABLA RESPONSIVE
+   ======================================== */
+
+.table-responsive {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.table th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+    color: #495057;
+    white-space: nowrap;
+}
+
+.table td {
+    vertical-align: middle;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* ========================================
+   BOTONES Y ACCIONES
+   ======================================== */
+
+.btn-group .btn {
+    margin-right: 2px;
+}
+
+.btn-group .btn:last-child {
+    margin-right: 0;
+}
+
+/* Botones de acción con colores específicos */
+.btn-eliminar {
+    transition: all 0.2s ease;
+}
+
+.btn-eliminar:hover {
+    transform: scale(1.05);
+}
+
+/* ========================================
+   BADGES Y ESTADOS
+   ======================================== */
+
+.badge {
+    font-size: 0.75em;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.badge i {
+    margin-right: 2px;
+}
+
+/* ========================================
+   CARDS Y CONTENEDORES
+   ======================================== */
+
+.card {
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid #dee2e6;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    font-weight: 600;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+    .table-responsive {
+        font-size: 14px;
+    }
+    
+    .btn-group {
+        flex-direction: column;
+    }
+    
+    .btn-group .btn {
+        margin-bottom: 2px;
+        margin-right: 0;
+    }
+    
+    .slide-thumbnail {
+        max-width: 60px;
+        max-height: 45px;
+    }
+    
+    .handle {
+        padding: 2px 4px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .container-fluid {
+        padding: 10px;
+    }
+    
+    .card-body {
+        padding: 15px;
+    }
+    
+    .table td, .table th {
+        padding: 8px;
+        font-size: 13px;
+    }
+}
+
+/* ========================================
+   ACCESIBILIDAD
+   ======================================== */
+
+.handle:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+}
+
+.btn:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}
+
+/* Texto alternativo para lectores de pantalla */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ========================================
+   ANIMACIONES
+   ======================================== */
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-row {
+    animation: slideIn 0.3s ease;
+}
+
+/* Animación para elementos nuevos */
+.new-slide {
+    animation: slideIn 0.5s ease;
+    border-left: 4px solid #28a745;
+}
+
+/* ========================================
+   UTILIDADES
+   ======================================== */
+
+.text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

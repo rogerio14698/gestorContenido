@@ -1,0 +1,36 @@
+/* Estilos específicos de la portada (inicio) */
+.noticias-img {
+    height: 220px;
+    object-fit: cover;
+}
+
+@media (max-width: 767px) {
+    .hero-caption h1 {
+        font-size: 2rem;}
+}
+
+
+
+#contenido-inicio {display: flex;}
+#contenido-inicio .col-lg-10{
+    margin: auto;
+    justify-self: center;
+}
+#contenido-inicio h1, #contenido-inicio h2 {
+    align-items: center;}
+
+.hero-slide {
+    min-height: clamp(35rem, 100vh, 60rem);
+    align-items: end;
+
+}
+.hero-overlay{
+    padding: 0.5rem 0;
+}
+.btn-link {
+        --bs-btn-color:var(--colornuntris);
+}
+.btn-link :hover{
+        --bs-btn-color:var(--colornuntris);
+}
+.carousel-indicators button{background-color:var(--colornuntris)!important;}

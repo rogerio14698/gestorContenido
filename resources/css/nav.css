@@ -1,0 +1,13 @@
+/* menu idiomas*/
+ .dropdown-menu { 
+    background-color: var(--colornuntris);
+   border: none;}
+.dropdown-item,.dropdown-item:focus, .dropdown-item:hover {
+   color:var(--color-blanco);
+   background-color: var(--colornuntris);
+  }
+
+ .dropdown-menu .active {
+    background-color: var(--colornuntris);
+    color: var(--color-blanco);
+    pointer-events: none;}

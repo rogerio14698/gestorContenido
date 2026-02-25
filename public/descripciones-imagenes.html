@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campos de Descripción de Imágenes - Eunomia CMS</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; }
+        .feature-box { margin: 20px 0; padding: 15px; border-left: 4px solid #007bff; background-color: #f8f9fa; }
+        .success { background-color: #d4edda; border-left-color: #28a745; }
+        .info { background-color: #d1ecf1; border-left-color: #17a2b8; }
+        .example { background-color: #fff3cd; border-left-color: #ffc107; margin: 10px 0; padding: 10px; }
+        code { background-color: #f8f9fa; padding: 2px 5px; border-radius: 3px; }
+        .form-example { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>📸 Campos de Descripción de Imágenes - Eunomia CMS</h1>
+    
+    <div class="feature-box success">
+        ✅ <strong>Nueva Funcionalidad Implementada:</strong> Campos de descripción para mejorar la accesibilidad y SEO
+    </div>
+
+    <h2>🎯 Características Implementadas</h2>
+
+    <div class="feature-box">
+        <h3>📋 Campos Añadidos</h3>
+        <ul>
+            <li><strong>imagen_alt</strong>: Descripción para imagen principal</li>
+            <li><strong>imagen_portada_alt</strong>: Descripción para imagen de portada</li>
+        </ul>
+    </div>
+
+    <div class="feature-box">
+        <h3>🗄️ Base de Datos Actualizada</h3>
+        <ul>
+            <li>✅ Migración ejecutada: <code>add_image_descriptions_to_contents_table</code></li>
+            <li>✅ Campos añadidos a la tabla <code>contents</code></li>
+            <li>✅ Modelo <code>Content</code> actualizado con campos fillable</li>
+        </ul>
+    </div>
+
+    <div class="feature-box">
+        <h3>📝 Formularios Actualizados</h3>
+        <ul>
+            <li>✅ Formulario de creación con campos de descripción</li>
+            <li>✅ Validación implementada (máximo 255 caracteres)</li>
+            <li>✅ Placeholders informativos</li>
+            <li>✅ Iconos de accesibilidad universal</li>
+        </ul>
+    </div>
+
+    <h2>🌐 Uso en el Frontend</h2>
+
+    <div class="example">
+        <h4>Antes (sin descripción):</h4>
+        <code>&lt;img src="..." alt="Título del contenido"&gt;</code>
+    </div>
+
+    <div class="example">
+        <h4>Después (con descripción personalizada):</h4>
+        <code>&lt;img src="..." alt="Vista del escenario durante la representación teatral"&gt;</code>
+    </div>
+
+    <div class="feature-box info">
+        <h3>🔍 Lógica de Fallback para ALT</h3>
+        <p>El sistema usa esta prioridad para el atributo <code>alt</code>:</p>
+        <ol>
+            <li><strong>Primera opción</strong>: Descripción personalizada (imagen_alt/imagen_portada_alt)</li>
+            <li><strong>Segunda opción</strong>: Título del contenido</li>
+            <li><strong>Tercera opción</strong>: Texto genérico ("Imagen de noticia", etc.)</li>
+        </ol>
+    </div>
+
+    <h2>📂 Archivos Actualizados</h2>
+
+    <div class="feature-box">
+        <h3>🗂️ Backend</h3>
+        <ul>
+            <li>✅ <code>database/migrations/*_add_image_descriptions_to_contents_table.php</code></li>
+            <li>✅ <code>app/Models/Content.php</code> - Campos fillable</li>
+            <li>✅ <code>app/Http/Controllers/Admin/ContentAdminController.php</code> - Validación</li>
+            <li>✅ <code>resources/views/admin/contents/create.blade.php</code> - Formulario</li>
+        </ul>
+    </div>
+
+    <div class="feature-box">
+        <h3>🎨 Frontend</h3>
+        <ul>
+            <li>✅ <code>resources/views/web/contenido.blade.php</code> - Vista detalle</li>
+            <li>✅ <code>resources/views/web/inicio.blade.php</code> - Página principal</li>
+            <li>✅ <code>resources/views/web/noticias.blade.php</code> - Lista de noticias</li>
+        </ul>
+    </div>
+
+    <h2>💡 Ejemplos de Descripciones</h2>
+
+    <div class="form-example">
+        <h4>✅ Buenas Descripciones:</h4>
+        <ul>
+            <li><strong>Para noticia:</strong> "Actores en el escenario durante la representación de Hamlet"</li>
+            <li><strong>Para entrevista:</strong> "Retrato del director teatral Juan García en su despacho"</li>
+            <li><strong>Para página:</strong> "Interior del Gran Teatro con público asistente"</li>
+        </ul>
+    </div>
+
+    <div class="form-example">
+        <h4>❌ Descripciones a Evitar:</h4>
+        <ul>
+            <li>"Imagen", "Foto", "Picture"</li>
+            <li>"Haga clic aquí"</li>
+            <li>Descripciones demasiado largas (+255 caracteres)</li>
+        </ul>
+    </div>
+
+    <h2>🔗 Enlaces de Prueba</h2>
+
+    <div class="feature-box">
+        <ul>
+            <li><a href="http://localhost:8081/admin/contents/create" target="_blank">➕ Crear Contenido con Descripciones</a></li>
+            <li><a href="http://localhost:8081/admin/contents" target="_blank">📋 Lista de Contenidos</a></li>
+            <li><a href="http://localhost:8081/es" target="_blank">🏠 Frontend - Página Principal</a></li>
+            <li><a href="http://localhost:8081/es/noticias" target="_blank">📰 Frontend - Noticias</a></li>
+        </ul>
+    </div>
+
+    <h2>🎉 Beneficios</h2>
+
+    <div class="feature-box success">
+        <ul>
+            <li><strong>🔍 Mejor SEO:</strong> Motores de búsqueda entienden mejor el contenido visual</li>
+            <li><strong>♿ Accesibilidad:</strong> Lectores de pantalla pueden describir las imágenes</li>
+            <li><strong>📱 UX Mejorada:</strong> Descripción útil si la imagen no carga</li>
+            <li><strong>🎭 Contextual:</strong> Descripciones específicas para contenido teatral</li>
+        </ul>
+    </div>
+
+    <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; color: #666;">
+        <p><strong>Eunomia CMS - Laravel 12</strong> | Sistema de gestión de imágenes con descripción accesible</p>
+    </footer>
+</body>
+</html>

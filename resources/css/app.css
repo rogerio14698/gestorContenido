@@ -1,0 +1,54 @@
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-slide {
+            min-height: clamp(22rem, 60vh, 36rem);
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            color: #fff;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(10, 16, 28, 0.85), rgba(19, 33, 63, 0.65));
+            width: 100%;
+            padding: clamp(3rem, 5vw, 5rem) 0;
+        }
+
+        .hero-caption h1,
+        .hero-caption h2 {
+            font-weight: 700;
+        }
+
+        main {
+            flex-grow: 1;
+        }
+
+  
+
+        @media (max-width: 991px) {
+            .site-header .navbar-collapse {
+                padding: 1rem 0;
+            }
+        }
+*,
+main,
+nav,
+input,
+select,
+textarea {
+  border-radius: 0;}
+
+body{
+    overflow-x: hidden;
+}

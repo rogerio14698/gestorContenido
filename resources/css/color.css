@@ -1,0 +1,20 @@
+:root {
+  --colornuntris: #f39d00;
+  --colorsecundario:#ea690b;
+  --color-texto: #000000;
+  --color-blanco: #ffffff;
+  --tamano-fuente: 16px;
+}
+* {
+  border-radius: 0 !important;
+}
+
+main{
+    color: var(--color-texto);
+    background-color: var(--color-blanco );
+    font-size: var(--tamano-fuente);
+}
+header nav{
+    background-color: var(--colornuntris)
+}
+.nav-link {color: var(--color-blanco);}

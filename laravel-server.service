@@ -1,0 +1,16 @@
+[Unit]
+Description=Laravel Server - Nuntris Teatro
+After=network.target
+
+[Service]
+Type=simple
+User=coco
+WorkingDirectory=/home/coco/www/laravel12/nuntristeatro-laravel12
+ExecStart=/usr/bin/php artisan serve --host=0.0.0.0 --port=8081
+Restart=always
+RestartSec=3
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,4 @@
+#detalle-contenido h1, #detalle-contenidoh2 {
+    display: flex;
+    justify-content: left;
+}

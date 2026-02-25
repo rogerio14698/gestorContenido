@@ -1,0 +1,9 @@
+:root {
+  --seccciones: 50px auto;
+  --parrafos: 1.8em;
+
+}
+section .container{
+    margin: var(--seccciones);
+}
+section p{line-height: var(--parrafos);}

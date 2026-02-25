@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Dropdown</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Test de Dropdown</h1>
+    
+    <div>
+        <label for="tipo_contenido_id">Tipo de Contenido:</label>
+        <select id="tipo_contenido_id">
+            <option value="">Seleccione un tipo</option>
+            <option value="1">Contenido</option>
+            <option value="3">Noticias</option>
+            <option value="5">Galerías</option>
+        </select>
+    </div>
+    
+    <div>
+        <label for="content_id">Contenido Específico:</label>
+        <select id="content_id">
+            <option value="">Primero seleccione un tipo</option>
+        </select>
+    </div>
+    
+    <div id="debug" style="margin-top: 20px; padding: 10px; border: 1px solid #ccc;"></div>
+    
+    <script>
+    $(document).ready(function() {
+        const contenidosPorTipo = {
+            "3": [
+                {"id": 8, "titulo": "titulo español", "slug": "titulo-espanol"}
+            ]
+        };
+        
+        console.log('=== TEST INICIADO ===');
+        $('#debug').append('<p>TEST INICIADO</p>');
+        
+        $('#tipo_contenido_id').change(function() {
+            const tipoContenidoId = $(this).val();
+            const contentSelect = $('#content_id');
+            
+            console.log('Tipo seleccionado:', tipoContenidoId);
+            $('#debug').append('<p>Tipo seleccionado: ' + tipoContenidoId + '</p>');
+            
+            contentSelect.empty();
+            contentSelect.append('<option value="">Seleccione un contenido</option>');
+            
+            if (tipoContenidoId && contenidosPorTipo[tipoContenidoId]) {
+                const contenidos = contenidosPorTipo[tipoContenidoId];
+                contenidos.forEach(function(content) {
+                    contentSelect.append('<option value="' + content.id + '">' + content.titulo + '</option>');
+                });
+                $('#debug').append('<p>Contenidos agregados: ' + contenidos.length + '</p>');
+            } else {
+                contentSelect.append('<option value="">No hay contenidos</option>');
+                $('#debug').append('<p>No hay contenidos para este tipo</p>');
+            }
+        });
+    });
+    </script>
+</body>
+</html>

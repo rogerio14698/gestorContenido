@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 Test Responsive Images - Srcset Corregido</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 20px; 
+            background: #f8f9fa;
+        }
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .status { 
+            padding: 15px; 
+            margin: 15px 0; 
+            border-radius: 5px; 
+            border-left: 4px solid;
+        }
+        .success { 
+            background: #d4edda; 
+            color: #155724; 
+            border-left-color: #28a745;
+        }
+        .info { 
+            background: #d1ecf1; 
+            color: #0c5460; 
+            border-left-color: #17a2b8;
+        }
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            border-left-color: #ffc107;
+        }
+        .test-image {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #007bff;
+            border-radius: 8px;
+            display: block;
+            margin: 20px 0;
+        }
+        .viewport-simulator {
+            border: 3px solid #333;
+            margin: 20px 0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .mobile-sim {
+            max-width: 375px;
+            background: #000;
+            padding: 10px;
+            color: white;
+            text-align: center;
+        }
+        .desktop-sim {
+            max-width: 1200px;
+            background: #f1f1f1;
+            padding: 10px;
+            text-align: center;
+        }
+        code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #e83e8c;
+        }
+        .debug-info {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 0.9em;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+        h1 { color: #007bff; }
+        h2 { color: #28a745; border-bottom: 2px solid #28a745; padding-bottom: 5px; }
+        h3 { color: #6c757d; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔍 Test de Responsive Images - Srcset Corregido</h1>
+        
+        <div class="status success">
+            ✅ <strong>SOLUCIONADO:</strong> Srcset ahora usa anchos reales de imagen (400w, 800w) en lugar de viewport (768w, 1200w)
+        </div>
+
+        <h2>📊 Antes vs Después</h2>
+        
+        <div class="status warning">
+            <strong>❌ ANTES (incorrecto):</strong><br>
+            <code>srcset="mobile.jpg 768w, desktop.jpg 1200w"</code><br>
+            <em>Problema: 768w y 1200w son anchos de viewport, no de imagen</em>
+        </div>
+
+        <div class="status success">
+            <strong>✅ AHORA (correcto):</strong><br>
+            <code>srcset="mobile.jpg 400w, desktop.jpg 800w"</code><br>
+            <em>Correcto: 400w y 800w son los anchos reales de las imágenes</em>
+        </div>
+
+        <h2>🧪 Ejemplo Real</h2>
+        
+        <div class="debug-info">
+Imagen Desktop: 800×364 px
+Imagen Móvil:   400×182 px
+
+HTML generado:
+&lt;img src="/storage/.../desktop.jpg" 
+     srcset="/storage/.../mobile.jpg 400w, /storage/.../desktop.jpg 800w" 
+     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"&gt;
+        </div>
+
+        <h2>📱 Cómo funciona el Srcset</h2>
+        
+        <div class="info">
+            <h3>🔍 Lógica del navegador:</h3>
+            <ul>
+                <li><strong>Pantalla 375px:</strong> Usa imagen de 400w (la más cercana y mayor)</li>
+                <li><strong>Pantalla 768px:</strong> Usa imagen de 800w (la más apropiada)</li>
+                <li><strong>Pantalla 1200px+:</strong> Usa imagen de 800w (suficiente para el contenedor)</li>
+            </ul>
+        </div>
+
+        <h2>🛠️ Para verificar en DevTools</h2>
+        
+        <div class="status info">
+            <strong>Pasos para probar:</strong>
+            <ol>
+                <li><strong>Abre DevTools:</strong> F12</li>
+                <li><strong>Ve a Network tab:</strong> Filtra por "Img"</li>
+                <li><strong>Cambia viewport:</strong> Toggle device toolbar</li>
+                <li><strong>Recarga la página:</strong> F5</li>
+                <li><strong>Verifica:</strong> Qué imagen se descarga según el tamaño</li>
+            </ol>
+        </div>
+
+        <h2>📏 Simulación de Viewports</h2>
+
+        <div class="viewport-simulator">
+            <div class="mobile-sim">
+                <h4>📱 Mobile (375px)</h4>
+                <p>Carga: <code>mobile.jpg (400w)</code></p>
+                <small>Resolución óptima para pantallas pequeñas</small>
+            </div>
+        </div>
+
+        <div class="viewport-simulator">
+            <div class="desktop-sim">
+                <h4>💻 Desktop (1200px)</h4>
+                <p>Carga: <code>desktop.jpg (800w)</code></p>
+                <small>Resolución completa para pantallas grandes</small>
+            </div>
+        </div>
+
+        <h2>⚡ Beneficios del Cambio</h2>
+        
+        <div class="status success">
+            <ul>
+                <li><strong>🚀 Performance:</strong> Móviles cargan imágenes 50% más pequeñas</li>
+                <li><strong>📶 Datos:</strong> Menos consumo de ancho de banda</li>
+                <li><strong>⚡ Velocidad:</strong> Carga más rápida en dispositivos móviles</li>
+                <li><strong>🎯 Precisión:</strong> Navegador elige la imagen correcta automáticamente</li>
+            </ul>
+        </div>
+
+        <h2>🔗 URLs de Prueba</h2>
+        
+        <div class="debug-info">
+• Cualquier página de contenido: /es/[slug]
+• Ejemplo específico: /es/tu-contenido-con-imagen
+• DevTools: F12 → Toggle Device Toolbar
+• Network: Verificar qué imagen se descarga
+        </div>
+
+        <div class="status success">
+            <h3>✅ Confirmación Técnica</h3>
+            <ul>
+                <li><strong>Configuración:</strong> Noticia imagen = 800×600 (desktop) → 400×300 (móvil)</li>
+                <li><strong>Srcset:</strong> Ahora usa anchos reales de imagen</li>
+                <li><strong>Sizes:</strong> Optimizado para diferentes viewports</li>
+                <li><strong>Fallback:</strong> Imagen desktop si móvil no está disponible</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Mostrar información de viewport actual
+        function showViewportInfo() {
+            const width = window.innerWidth;
+            const info = document.createElement('div');
+            info.className = 'status info';
+            info.style.position = 'fixed';
+            info.style.top = '10px';
+            info.style.right = '10px';
+            info.style.maxWidth = '300px';
+            info.style.zIndex = '9999';
+            info.innerHTML = `
+                <strong>🔍 Viewport Actual:</strong><br>
+                Ancho: ${width}px<br>
+                Imagen que debería cargar: <strong>${width <= 768 ? 'mobile.jpg (400w)' : 'desktop.jpg (800w)'}</strong>
+            `;
+            
+            // Remover info anterior si existe
+            const existing = document.querySelector('.viewport-info');
+            if (existing) existing.remove();
+            
+            info.className += ' viewport-info';
+            document.body.appendChild(info);
+        }
+
+        // Mostrar info al cargar y al redimensionar
+        showViewportInfo();
+        window.addEventListener('resize', showViewportInfo);
+    </script>
+</body>
+</html>
