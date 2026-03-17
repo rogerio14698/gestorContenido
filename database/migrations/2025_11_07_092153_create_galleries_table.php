@@ -22,7 +22,6 @@ return new class extends Migration
             $table->integer('orden')->default(0);
             $table->json('configuracion')->nullable(); // Configuraciones específicas de la galería
             $table->timestamps();
-            
             $table->index(['activa', 'visible_web']);
             $table->index('orden');
         });

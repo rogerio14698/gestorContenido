@@ -13,6 +13,7 @@ use App\Services\ImageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 class ContentAdminController extends Controller
 {
@@ -103,6 +104,24 @@ class ContentAdminController extends Controller
                 // Validación de imágenes
                 'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
                 'imagen_portada' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+            ], [
+                'tipo_contenido.required' => 'El tipo de contenido es obligatorio.',
+                'tipo_contenido.in' => 'El tipo de contenido seleccionado no es válido.',
+                'fecha_publicacion.date' => 'La fecha de publicación no es válida.',
+                'lugar.max' => 'El lugar no puede superar los 100 caracteres.',
+                'textos.required' => 'Debe proporcionar textos en al menos un idioma.',
+                'textos.array' => 'El formato de los textos no es válido.',
+                'textos.*.titulo.max' => 'El título no puede superar los 255 caracteres.',
+                'textos.*.slug.max' => 'El slug no puede superar los 255 caracteres.',
+                'textos.*.slug.regex' => 'El slug solo puede contener letras minúsculas, números y guiones.',
+                'textos.*.imagen_alt.max' => 'El texto alternativo de la imagen no puede superar los 255 caracteres.',
+                'textos.*.imagen_portada_alt.max' => 'El texto alternativo de la portada no puede superar los 255 caracteres.',
+                'imagen.image' => 'La imagen principal debe ser un archivo de imagen válido.',
+                'imagen.mimes' => 'La imagen principal debe ser de tipo: jpeg, png, jpg, gif o webp.',
+                'imagen.max' => 'La imagen principal no puede superar los 10MB.',
+                'imagen_portada.image' => 'La imagen de portada debe ser un archivo de imagen válido.',
+                'imagen_portada.mimes' => 'La imagen de portada debe ser de tipo: jpeg, png, jpg, gif o webp.',
+                'imagen_portada.max' => 'La imagen de portada no puede superar los 10MB.',
             ]);
 
             // Validación personalizada: al menos debe tener título y contenido en un idioma
@@ -198,6 +217,8 @@ class ContentAdminController extends Controller
         return redirect()->route('admin.contents.index')
                         ->with('success', 'Contenido creado exitosamente.');
                         
+        } catch (ValidationException $e) {
+            throw $e;
         } catch (\Exception $e) {
             return back()->withErrors(['error' => 'Error al crear contenido: ' . $e->getMessage()])
                          ->withInput();
@@ -252,6 +273,24 @@ class ContentAdminController extends Controller
             'textos.*.slug' => 'nullable|string|max:255|regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/',
             'textos.*.imagen_alt' => 'nullable|string|max:255',
             'textos.*.imagen_portada_alt' => 'nullable|string|max:255',
+        ], [
+            'tipo_contenido.required' => 'El tipo de contenido es obligatorio.',
+            'tipo_contenido.in' => 'El tipo de contenido seleccionado no es válido.',
+            'fecha_publicacion.date' => 'La fecha de publicación no es válida.',
+            'lugar.max' => 'El lugar no puede superar los 100 caracteres.',
+            'textos.required' => 'Debe proporcionar textos en al menos un idioma.',
+            'textos.array' => 'El formato de los textos no es válido.',
+            'textos.*.titulo.max' => 'El título no puede superar los 255 caracteres.',
+            'textos.*.slug.max' => 'El slug no puede superar los 255 caracteres.',
+            'textos.*.slug.regex' => 'El slug solo puede contener letras minúsculas, números y guiones.',
+            'textos.*.imagen_alt.max' => 'El texto alternativo de la imagen no puede superar los 255 caracteres.',
+            'textos.*.imagen_portada_alt.max' => 'El texto alternativo de la portada no puede superar los 255 caracteres.',
+            'imagen.image' => 'La imagen principal debe ser un archivo de imagen válido.',
+            'imagen.mimes' => 'La imagen principal debe ser de tipo: jpeg, png, jpg, gif o webp.',
+            'imagen.max' => 'La imagen principal no puede superar los 2MB.',
+            'imagen_portada.image' => 'La imagen de portada debe ser un archivo de imagen válido.',
+            'imagen_portada.mimes' => 'La imagen de portada debe ser de tipo: jpeg, png, jpg, gif o webp.',
+            'imagen_portada.max' => 'La imagen de portada no puede superar los 2MB.',
         ]);
 
         // Validación personalizada: al menos debe tener título y contenido en un idioma

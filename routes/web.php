@@ -20,9 +20,9 @@ use App\Http\Controllers\Admin\UserController;
 Route::get('/contacto', [\App\Http\Controllers\ContactoController::class, 'form'])->name('contacto.form');
 Route::post('/contacto', [\App\Http\Controllers\ContactoController::class, 'enviar'])->name('contacto.enviar');
 
-// Restringir el parámetro {idioma} a tres letras
-// Se limita a 3 ya que catalan es cat
-Route::pattern('idioma', '[a-zA-Z]{3}');
+// Restringir el parámetro {idioma} a 2 o 3 letras
+// Soporta códigos como es/as y también cat
+Route::pattern('idioma', '[a-zA-Z]{2,3}');
 
 // Ruta principal
 Route::get('/', [WebController::class, 'index'])->name('principal');
