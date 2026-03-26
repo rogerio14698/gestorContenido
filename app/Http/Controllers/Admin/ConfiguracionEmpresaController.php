@@ -16,12 +16,18 @@ class ConfiguracionEmpresaController extends Controller
 
     public function edit()
     {
-        $config = ConfiguracionEmpresa::first();
+        $config = ConfiguracionEmpresa::firstOrCreate([], [
+            'nombre' => null,
+            'direccion' => null,
+            'telefono' => null,
+            'email' => null,
+            'redes_sociales' => [],
+        ]);
         $idiomas = \App\Models\Idioma::orderBy('orden')->orderBy('nombre')->get();
         // Obtener textos meta por idioma
         $textosMeta = [];
         foreach ($idiomas as $idioma) {
-            $texto = $config->textos()->where('idioma_id', $idioma->id)->first();
+            $texto = $config->textos()->where('language_id', $idioma->id)->first();
             $textosMeta[$idioma->id] = $texto;
         }
         return view('admin.configuracion_empresa.edit', compact('config', 'idiomas', 'textosMeta'));
@@ -43,13 +49,19 @@ class ConfiguracionEmpresaController extends Controller
         }
         $data = $request->validate($rules);
 
-        $config = ConfiguracionEmpresa::first();
+        $config = ConfiguracionEmpresa::firstOrCreate([], [
+            'nombre' => null,
+            'direccion' => null,
+            'telefono' => null,
+            'email' => null,
+            'redes_sociales' => [],
+        ]);
         $redes_actuales = $config ? ($config->redes_sociales ?? []) : [];
         $redes = $request->input('redes_sociales', []);
 
         // Guardar/actualizar textos meta en textos_idiomas
         foreach ($idiomas as $idioma) {
-            $texto = $config->textos()->where('idioma_id', $idioma->id)->first();
+            $texto = $config->textos()->where('language_id', $idioma->id)->first();
             $metaData = [
                 'metatitulo' => $data["metatitulo_{$idioma->id}"] ?? null,
                 'metadescripcion' => $data["metadescripcion_{$idioma->id}"] ?? null,
@@ -60,7 +72,7 @@ class ConfiguracionEmpresaController extends Controller
                 $texto->update($metaData);
             } else {
                 $config->textos()->create(array_merge($metaData, [
-                    'idioma_id' => $idioma->id,
+                    'language_id' => $idioma->id,
                 ]));
             }
         }
@@ -111,11 +123,7 @@ class ConfiguracionEmpresaController extends Controller
         }
         $data['redes_sociales'] = $redes_final;
 
-        if (!$config) {
-            $config = ConfiguracionEmpresa::create($data);
-        } else {
-            $config->update($data);
-        }
+        $config->update($data);
         return redirect()->back()->with('success', 'Datos actualizados correctamente');
     }
 }

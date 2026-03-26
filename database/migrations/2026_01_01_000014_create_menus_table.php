@@ -6,28 +6,25 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
             $table->foreignId('parent_id')->nullable()->constrained('menus')->onDelete('cascade');
-            $table->string('title');
-            $table->string('label')->nullable();
+            $table->enum('tipo_enlace', ['contenido', 'url_externa', 'ninguno'])->default('contenido');
+            $table->foreignId('tipo_contenido_id')->nullable()->constrained('content_types')->onDelete('set null');
             $table->foreignId('content_id')->nullable()->constrained('contents')->onDelete('set null');
             $table->text('url')->nullable();
-            $table->integer('order')->nullable();
+            $table->string('url_externa')->nullable();
             $table->string('icon')->nullable();
             $table->boolean('menu_pie')->default(false);
+            $table->boolean('visible')->default(true);
+            $table->boolean('abrir_nueva_ventana')->default(false);
+            $table->integer('orden')->default(1);
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('menus');

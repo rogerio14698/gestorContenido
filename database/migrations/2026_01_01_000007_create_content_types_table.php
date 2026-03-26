@@ -8,9 +8,10 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('tipo_contenidos', function (Blueprint $table) {
+        Schema::create('content_types', function (Blueprint $table) {
             $table->id();
             $table->string('tipo_contenido', 100)->nullable();
+            $table->string('descripcion', 255)->nullable();
             $table->string('icono', 100)->nullable();
             $table->timestamps();
         });
@@ -18,6 +19,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('tipo_contenidos');
+        Schema::dropIfExists('content_types');
     }
 };

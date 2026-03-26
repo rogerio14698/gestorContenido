@@ -17,7 +17,7 @@ class SlideTranslation extends Model
      */
     protected $fillable = [
         'slide_id',
-        'idioma_id',
+        'language_id',
         'titulo',
         'descripcion', 
         'alt_text',
@@ -37,7 +37,7 @@ class SlideTranslation extends Model
      */
     public function idioma(): BelongsTo
     {
-        return $this->belongsTo(Idioma::class);
+        return $this->belongsTo(Idioma::class, 'language_id');
     }
 
     /**

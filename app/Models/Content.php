@@ -49,7 +49,7 @@ class Content extends Model
      */
     public function textos()
     {
-        return $this->hasMany(TextoIdioma::class, 'contenido_id');
+        return $this->hasMany(TextoIdioma::class, 'content_id');
     }
 
     /**
@@ -89,7 +89,7 @@ class Content extends Model
      */
     public function getTextoEnIdioma($idiomaId)
     {
-        return $this->textos()->where('idioma_id', $idiomaId)->first();
+        return $this->textos()->where('language_id', $idiomaId)->first();
     }
 
     /**
@@ -113,7 +113,7 @@ class Content extends Model
         // Fallback al idioma principal
         $idiomaPrincipal = \App\Models\Idioma::where('es_principal', true)->first();
         if ($idiomaPrincipal) {
-            $textoFallback = $this->textos()->where('idioma_id', $idiomaPrincipal->id)->first();
+            $textoFallback = $this->textos()->where('language_id', $idiomaPrincipal->id)->first();
             if ($textoFallback && $textoFallback->titulo) {
                 return $textoFallback->titulo;
             }
@@ -133,6 +133,6 @@ class Content extends Model
      */
     public function tipoContenido()
     {
-        return $this->belongsTo(TipoContenido::class, 'tipo_contenido_id');
+        return $this->belongsTo(TipoContenido::class, 'tipo_contenido', 'tipo_contenido');
     }
 }

@@ -61,7 +61,7 @@
                                         </td>
                                         <td class="text-center">
                                             @php
-                                                $contenidos = \App\Models\TextoIdioma::where('tipo_contenido_id', $tipo->id)->count();
+                                                $contenidos = \App\Models\TextoIdioma::where('content_type_id', $tipo->id)->count();
                                             @endphp
                                             @if($contenidos > 0)
                                                 <span class="badge badge-success">{{ $contenidos }}</span>
@@ -87,7 +87,7 @@
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 @php
-                                                    $contenidos = \App\Models\TextoIdioma::where('tipo_contenido_id', $tipo->id)->count();
+                                                    $contenidos = \App\Models\TextoIdioma::where('content_type_id', $tipo->id)->count();
                                                 @endphp
                                                 @if($contenidos == 0)
                                                     <button type="button" 

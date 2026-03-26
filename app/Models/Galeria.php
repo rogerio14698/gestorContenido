@@ -9,11 +9,12 @@ class Galeria extends Model
 {
     use HasFactory;
 
-    protected $table = 'galerias';
+    protected $table = 'galleries';
 
     protected $fillable = [
-        'carpeta',
-        'orden',
+        'nombre',
+        'descripcion',
+        'activa',
     ];
 
     /**

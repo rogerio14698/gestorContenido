@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,15 +18,21 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            IdiomasSeeder::class,  // Nuevo seeder para idiomas dinámicos
-            IdiomaSeeder::class,
+            IdiomasSeeder::class,
             TipoContenidoSeeder::class,
             ConfiguracionSeeder::class,
+            RolePermissionSeeder::class,
         ]);
 
-        User::factory()->create([
-            'name' => 'Administrator',
-            'email' => 'admin@nuntristeatro.com',
-        ]);
+        $adminRole = Role::where('slug', 'administrador')->first();
+
+        User::updateOrCreate(
+            ['email' => 'admin@nuntristeatro.com'],
+            [
+                'name' => 'Administrator',
+                'password' => Hash::make('password123'),
+                'role_id' => $adminRole?->id,
+            ]
+        );
     }
 }

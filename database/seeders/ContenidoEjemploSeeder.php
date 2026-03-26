@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Content;
 use App\Models\TextoIdioma;
 use App\Models\Menu;
-use App\Models\Galeria;
+use App\Models\Gallery;
 use App\Models\Idioma;
 use App\Models\TipoContenido;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -19,17 +19,18 @@ class ContenidoEjemploSeeder extends Seeder
     public function run(): void
     {
         // Obtener idiomas
-        $idiomaEs = Idioma::where('codigo', 'es')->first();
-        $idiomaAs = Idioma::where('codigo', 'as')->first();
+        $idiomaEs = Idioma::where('etiqueta', 'es')->first();
+        $idiomaAs = Idioma::where('etiqueta', 'ast')->first();
         
         // Obtener tipos de contenido
         $tipoContenido = TipoContenido::where('tipo_contenido', 'Contenido')->first();
         $tipoNoticias = TipoContenido::where('tipo_contenido', 'Noticias')->first();
         
         // Crear galería de ejemplo
-        $galeria = Galeria::create([
-            'carpeta' => 'inicio',
-            'orden' => 1,
+        $galeria = Gallery::create([
+            'nombre' => 'Inicio',
+            'descripcion' => 'Galería de inicio',
+            'activa' => true,
         ]);
 
         // 1. Crear página de inicio
@@ -42,9 +43,9 @@ class ContenidoEjemploSeeder extends Seeder
 
         // Textos en español
         TextoIdioma::create([
-            'idioma_id' => $idiomaEs->id,
-            'contenido_id' => $contenidoInicio->id,
-            'tipo_contenido_id' => $tipoContenido->id,
+            'language_id' => $idiomaEs->id,
+            'content_id' => $contenidoInicio->id,
+            'content_type_id' => $tipoContenido->id,
             'titulo' => 'Bienvenidos a Nuntris Teatro',
             'subtitulo' => 'Compañía de Teatro Asturiana',
             'resumen' => 'Descubre la magia del teatro asturiano con Nuntris Teatro, una compañía comprometida con la cultura y las tradiciones.',
@@ -68,9 +69,9 @@ class ContenidoEjemploSeeder extends Seeder
 
         // Textos en asturiano
         TextoIdioma::create([
-            'idioma_id' => $idiomaAs->id,
-            'contenido_id' => $contenidoInicio->id,
-            'tipo_contenido_id' => $tipoContenido->id,
+            'language_id' => $idiomaAs->id,
+            'content_id' => $contenidoInicio->id,
+            'content_type_id' => $tipoContenido->id,
             'titulo' => 'Bienveníos a Nuntris Teatro',
             'subtitulo' => 'Compañía de Teatru Asturiana',
             'resumen' => 'Descubri la maxia del teatru asturianu con Nuntris Teatro, una compañía comprometida cola cultura y les tradiciones.',
@@ -208,9 +209,9 @@ class ContenidoEjemploSeeder extends Seeder
 
             // Texto en español
             TextoIdioma::create([
-                'idioma_id' => $idiomaEs->id,
-                'contenido_id' => $content->id,
-                'tipo_contenido_id' => $tipoNoticias->id,
+                'language_id' => $idiomaEs->id,
+                'content_id' => $content->id,
+                'content_type_id' => $tipoNoticias->id,
                 'titulo' => $noticia['titulo_es'],
                 'resumen' => $noticia['resumen_es'],
                 'contenido' => $noticia['contenido_es'],
@@ -220,9 +221,9 @@ class ContenidoEjemploSeeder extends Seeder
 
             // Texto en asturiano
             TextoIdioma::create([
-                'idioma_id' => $idiomaAs->id,
-                'contenido_id' => $content->id,
-                'tipo_contenido_id' => $tipoNoticias->id,
+                'language_id' => $idiomaAs->id,
+                'content_id' => $content->id,
+                'content_type_id' => $tipoNoticias->id,
                 'titulo' => $noticia['titulo_as'],
                 'resumen' => $noticia['resumen_as'],
                 'contenido' => $noticia['contenido_as'],
@@ -233,10 +234,11 @@ class ContenidoEjemploSeeder extends Seeder
 
         // Crear algunos elementos de menú
         $menuInicio = Menu::create([
-            'title' => 'Inicio',
+            'tipo_enlace' => 'contenido',
             'content_id' => $contenidoInicio->id,
-            'order' => 1,
+            'orden' => 1,
             'icon' => 'fas fa-home',
+            'visible' => true,
         ]);
 
         $this->command->info('Contenido de ejemplo creado exitosamente.');

@@ -73,7 +73,7 @@ class MenuAdminController extends Controller
         $request->validate([
             'parent_id' => 'nullable|exists:menus,id',
             'tipo_enlace' => 'required|in:contenido,url_externa,ninguno',
-            'tipo_contenido_id' => 'nullable|exists:tipo_contenidos,id',
+            'tipo_contenido_id' => 'nullable|exists:content_types,id',
             'content_id' => 'nullable|exists:contents,id',
             'url' => 'nullable|string',
             'visible' => 'boolean',
@@ -109,7 +109,7 @@ class MenuAdminController extends Controller
                 if ($menu->tipo_enlace === 'contenido' && $menu->content_id) {
                     $contenido = \App\Models\Content::find($menu->content_id);
                     if ($contenido) {
-                        $textoContenido = $contenido->textos()->where('idioma_id', $idiomaId)->first();
+                        $textoContenido = $contenido->textos()->where('language_id', $idiomaId)->first();
                         $slug = $textoContenido?->slug;
                     }
                 }
@@ -124,14 +124,14 @@ class MenuAdminController extends Controller
                 TextoIdioma::create([
                     'objeto_type' => 'App\\Models\\Menu',
                     'objeto_id' => $menu->id,
-                    'idioma_id' => $idiomaId,
+                    'language_id' => $idiomaId,
                     'titulo' => $textoData['titulo'],
                     'slug' => $slug,
                     'activo' => true,
                     'visible' => true,
                     // Campos requeridos por compatibilidad
-                    'tipo_contenido_id' => $tipoContenido ? $tipoContenido->id : null,
-                    'contenido_id' => null,
+                    'content_type_id' => $tipoContenido ? $tipoContenido->id : null,
+                    'content_id' => null,
                 ]);
             }
         }
@@ -176,7 +176,7 @@ class MenuAdminController extends Controller
         $request->validate([
             'parent_id' => 'nullable|exists:menus,id',
             'tipo_enlace' => 'required|in:contenido,url_externa,ninguno',
-            'tipo_contenido_id' => 'nullable|exists:tipo_contenidos,id',
+            'tipo_contenido_id' => 'nullable|exists:content_types,id',
             'content_id' => 'nullable|exists:contents,id',
             'url_externa' => 'nullable|url',
             'icon' => 'nullable|string|max:100',
@@ -206,14 +206,14 @@ class MenuAdminController extends Controller
         foreach ($request->textos as $idiomaId => $textoData) {
             if (!empty($textoData['titulo'])) {
                 $texto = $menu->textos()
-                             ->where('idioma_id', $idiomaId)
+                             ->where('language_id', $idiomaId)
                              ->first();
                 // Si el menú es de tipo contenido y tiene content_id, usar el slug del contenido en ese idioma
                 $slug = null;
                 if ($menu->tipo_enlace === 'contenido' && $menu->content_id) {
                     $contenido = \App\Models\Content::find($menu->content_id);
                     if ($contenido) {
-                        $textoContenido = $contenido->textos()->where('idioma_id', $idiomaId)->first();
+                        $textoContenido = $contenido->textos()->where('language_id', $idiomaId)->first();
                         $slug = $textoContenido?->slug;
                     }
                 }
@@ -237,9 +237,9 @@ class MenuAdminController extends Controller
                     TextoIdioma::create(array_merge($data, [
                         'objeto_type' => 'App\\Models\\Menu',
                         'objeto_id' => $menu->id,
-                        'idioma_id' => $idiomaId,
-                        'tipo_contenido_id' => $menu->tipo_contenido_id,
-                        'contenido_id' => $menu->content_id,
+                        'language_id' => $idiomaId,
+                        'content_type_id' => $menu->tipo_contenido_id,
+                        'content_id' => $menu->content_id,
                     ]));
                 }
             }

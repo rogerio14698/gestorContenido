@@ -95,7 +95,7 @@
                                 <td><strong>Contenidos:</strong></td>
                                 <td>
                                     @php
-                                        $contenidos = \App\Models\TextoIdioma::where('tipo_contenido_id', $tipo->id)->count();
+                                        $contenidos = \App\Models\TextoIdioma::where('content_type_id', $tipo->id)->count();
                                     @endphp
                                     <span class="badge badge-{{ $contenidos > 0 ? 'success' : 'light' }}">
                                         {{ $contenidos }}
@@ -108,7 +108,7 @@
 
                 <!-- Advertencias -->
                 @php
-                    $contenidos = \App\Models\TextoIdioma::where('tipo_contenido_id', $tipo->id)->count();
+                    $contenidos = \App\Models\TextoIdioma::where('content_type_id', $tipo->id)->count();
                 @endphp
                 @if($contenidos > 0)
                     <div class="card card-warning">

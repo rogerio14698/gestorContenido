@@ -74,7 +74,7 @@ class Slide extends Model
         $idioma_id = $idioma_id ?? $this->getCurrentLanguageId();
         
         return $this->translations()
-                   ->where('idioma_id', $idioma_id)
+                   ->where('language_id', $idioma_id)
                    ->first();
     }
 
@@ -245,7 +245,7 @@ class Slide extends Model
     {
         foreach ($translations as $idioma_id => $data) {
             $this->translations()->updateOrCreate(
-                ['idioma_id' => $idioma_id],
+                ['language_id' => $idioma_id],
                 [
                     'titulo' => $data['titulo'] ?? '',
                     'descripcion' => $data['descripcion'] ?? '',

@@ -11,7 +11,7 @@ class Idioma extends Model
 {
     use HasFactory;
 
-    protected $table = 'idiomas';
+    protected $table = 'languages';
 
     protected $fillable = [
         'nombre',
@@ -70,7 +70,7 @@ class Idioma extends Model
      */
     public function textos()
     {
-        return $this->hasMany(TextoIdioma::class);
+        return $this->hasMany(TextoIdioma::class, 'language_id');
     }
 
     /**

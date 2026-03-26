@@ -10,7 +10,7 @@ class TipoContenido extends Model
 {
     use HasFactory;
 
-    protected $table = 'tipo_contenidos';
+    protected $table = 'content_types';
 
     protected $fillable = [
         'tipo_contenido',
@@ -59,6 +59,6 @@ class TipoContenido extends Model
      */
     public function textos()
     {
-        return $this->hasMany(TextoIdioma::class);
+        return $this->hasMany(TextoIdioma::class, 'content_type_id');
     }
 }

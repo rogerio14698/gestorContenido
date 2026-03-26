@@ -10,12 +10,12 @@
 
 @section('content')
     @php
-        $textosAsociados = \App\Models\TextoIdioma::where('tipo_contenido_id', $tipo->id)
+        $textosAsociados = \App\Models\TextoIdioma::where('content_type_id', $tipo->id)
             ->with(['idioma', 'contenidoModel'])
             ->orderByDesc('updated_at')
             ->get();
         $totalContenidos = $textosAsociados->count();
-        $idiomasUsados = $textosAsociados->pluck('idioma_id')->unique()->count();
+        $idiomasUsados = $textosAsociados->pluck('language_id')->unique()->count();
         $contenidosRecientes = $textosAsociados->take(10);
         $puedeEliminar = $totalContenidos === 0;
     @endphp

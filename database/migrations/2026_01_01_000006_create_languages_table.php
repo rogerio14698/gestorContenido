@@ -6,12 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('idiomas', function (Blueprint $table) {
+        Schema::create('languages', function (Blueprint $table) {
             $table->id();
             $table->string('nombre', 100);
             $table->string('etiqueta', 10)->unique();
@@ -20,17 +17,15 @@ return new class extends Migration
             $table->boolean('es_principal')->default(false);
             $table->integer('orden')->default(0);
             $table->timestamps();
+
             $table->index(['activo']);
             $table->index(['es_principal']);
             $table->index(['orden']);
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('idiomas');
+        Schema::dropIfExists('languages');
     }
 };

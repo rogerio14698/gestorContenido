@@ -43,8 +43,12 @@
                             <div class="card">
                                 <div class="card-header" id="heading-{{ $accordionId }}">
                                     <h5 class="mb-0">
-                                        <button class="btn btn-link" type="button" data-toggle="collapse" 
-                                                data-target="#{{ $accordionId }}" aria-expanded="true" 
+                                        <button class="btn btn-link" type="button"
+                                                data-toggle="collapse"
+                                                data-target="#{{ $accordionId }}"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#{{ $accordionId }}"
+                                                aria-expanded="{{ $loop->first ? 'true' : 'false' }}"
                                                 aria-controls="{{ $accordionId }}">
                                             <i class="fas fa-folder mr-2"></i>
                                             {{ $moduloNombre }} 
@@ -55,7 +59,8 @@
 
                                 <div id="{{ $accordionId }}" class="collapse {{ $loop->first ? 'show' : '' }}" 
                                      aria-labelledby="heading-{{ $accordionId }}" 
-                                     data-parent="#permissionsAccordion">
+                                     data-parent="#permissionsAccordion"
+                                     data-bs-parent="#permissionsAccordion">
                                     <div class="card-body">
                                         <div class="table-responsive">
                                             <table class="table table-sm">

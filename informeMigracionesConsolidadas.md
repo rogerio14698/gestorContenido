@@ -1,6 +1,6 @@
-﻿# Informe de Migraciones
+﻿# Migraciones Consolidadas 2026
 
-Listado consolidado de migraciones actuales en `database/migrations`, separadas por nombre.
+Estructura consolidada y limpia de migraciones en `database/migrations`.
 
 ## 2026_01_01_000001_create_roles_table.php
 

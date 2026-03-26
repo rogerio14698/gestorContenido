@@ -84,7 +84,7 @@ class Menu extends Model
         if ($idiomaActual) {
             $texto = \App\Models\TextoIdioma::where('objeto_type', 'App\Models\Menu')
                 ->where('objeto_id', $this->id)
-                ->where('idioma_id', $idiomaActual->id)
+                ->where('language_id', $idiomaActual->id)
                 ->where('activo', true)
                 ->first();
 
@@ -98,7 +98,7 @@ class Menu extends Model
         if ($idiomaPrincipal) {
             $textoFallback = \App\Models\TextoIdioma::where('objeto_type', 'App\Models\Menu')
                 ->where('objeto_id', $this->id)
-                ->where('idioma_id', $idiomaPrincipal->id)
+                ->where('language_id', $idiomaPrincipal->id)
                 ->where('activo', true)
                 ->first();
 

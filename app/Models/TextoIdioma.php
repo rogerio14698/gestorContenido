@@ -9,12 +9,12 @@ class TextoIdioma extends Model
 {
     use HasFactory;
 
-    protected $table = 'textos_idiomas';
+    protected $table = 'content_texts';
 
     protected $fillable = [
-        'idioma_id',
-        'contenido_id',
-        'tipo_contenido_id', // Puede ser null para empresa
+        'language_id',
+        'content_id',
+        'content_type_id',
         'titulo',
         'subtitulo',
         'resumen',
@@ -42,7 +42,7 @@ class TextoIdioma extends Model
      */
     public function idioma()
     {
-        return $this->belongsTo(Idioma::class);
+        return $this->belongsTo(Idioma::class, 'language_id');
     }
 
     /**
@@ -50,7 +50,7 @@ class TextoIdioma extends Model
      */
     public function contenidoModel()
     {
-        return $this->belongsTo(Content::class, 'contenido_id');
+        return $this->belongsTo(Content::class, 'content_id');
     }
 
     /**
@@ -58,7 +58,7 @@ class TextoIdioma extends Model
      */
     public function tipoContenido()
     {
-        return $this->belongsTo(TipoContenido::class);
+        return $this->belongsTo(TipoContenido::class, 'content_type_id');
     }
 
     /**

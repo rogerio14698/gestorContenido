@@ -103,7 +103,7 @@ class TipoContenidoController extends Controller
             ]);
             
             // Verificar si tiene contenidos asociados
-            $contenidosAsociados = \App\Models\TextoIdioma::where('tipo_contenido_id', $tipos_contenido->id)->count();
+            $contenidosAsociados = \App\Models\TextoIdioma::where('content_type_id', $tipos_contenido->id)->count();
             
             \Log::info('TipoContenidoController@destroy - Contenidos asociados: ' . $contenidosAsociados);
             

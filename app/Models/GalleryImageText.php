@@ -12,7 +12,7 @@ class GalleryImageText extends Model
 
     protected $fillable = [
         'gallery_image_id',
-        'idioma_id',
+        'language_id',
         'titulo',
         'descripcion',
         'alt_text'
@@ -31,7 +31,7 @@ class GalleryImageText extends Model
      */
     public function idioma(): BelongsTo
     {
-        return $this->belongsTo(Idioma::class);
+        return $this->belongsTo(Idioma::class, 'language_id');
     }
 
     /**
@@ -39,7 +39,7 @@ class GalleryImageText extends Model
      */
     public function scopeForLanguage($query, $idiomaId)
     {
-        return $query->where('idioma_id', $idiomaId);
+        return $query->where('language_id', $idiomaId);
     }
 
     /**
